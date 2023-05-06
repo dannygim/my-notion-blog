@@ -1,7 +1,8 @@
-import { Client, isFullPage, isNotionClientError } from "@notionhq/client";
+import { Client, isNotionClientError } from "@notionhq/client";
 import { NOTION_TOKEN, NOTION_DATABASE_ID, PAGE_SIZE } from "$/lib/server/env.ts";
 import { PostRepository } from "$/domain/repository/post.ts";
 import { Post } from "$/domain/model/post.ts";
+import { getTitle, getDescription, getCoverUrl, getCreatedAt, getLastEditedAt } from "$/lib/server/notion.ts";
 
 export class PostNotionClient implements PostRepository {
   private notionClient: Client;
@@ -25,35 +26,14 @@ export class PostNotionClient implements PostRepository {
       });
 
       const posts = response.results
-        .map(p => {
-          if (!isFullPage(p)) {
-            return null;
-          }
-
-          // title
-          const name = p.properties.Name;
-          const title = name.type === "title" ? name.title.at(0)?.plain_text ?? "Untitled" : "Untitled";
-
-          // description
-          const description = p.properties.Description?.type === "rich_text" ? p.properties.Description.rich_text.at(0)?.plain_text : undefined;
-
-          // cover
-          let cover: string | undefined;
-          if (p.cover?.type === "file") {
-            cover = p.cover.file.url;
-          } else if (p.cover?.type === "external") {
-            cover = p.cover.external.url;
-          }
-
-          return {
-            id: p.id,
-            title,
-            description,
-            cover,
-            createdAt: p.created_time,
-            lastEditedAt: p.last_edited_time,
-          };
-        })
+        .map(p => ({
+          id: p.id,
+          title: getTitle(p),
+          description: getDescription(p),
+          cover: getCoverUrl(p),
+          createdAt: getCreatedAt(p),
+          lastEditedAt: getLastEditedAt(p),
+        }))
         .filter(p => !!p) as Post[];
 
       return posts;

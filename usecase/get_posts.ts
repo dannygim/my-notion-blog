@@ -1,7 +1,7 @@
 import { Post } from "$/domain/model/post.ts";
 import { PostRepository } from "$/domain/repository/post.ts";
 
-export class GetPostsUserCase {
+export class GetPostsUseCase {
   private postRepository: PostRepository;
 
   constructor(postRepository: PostRepository) {
