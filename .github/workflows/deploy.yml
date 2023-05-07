@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - develop
+      - blog
 
 jobs:
   deploy_example:
