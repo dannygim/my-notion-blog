@@ -7,12 +7,14 @@ on:
       - develop
 
 jobs:
-  deploy:
-    name: Deploy
+  deploy_example:
+    name: Deploy Example
     runs-on: ubuntu-latest
     permissions:
       id-token: write # Needed for auth with Deno Deploy
       contents: read # Needed to clone the repository
+    if: github.ref != 'refs/heads/blog'
+    environment: Example
 
     steps:
       - name: Clone repository
@@ -21,5 +23,24 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "my-notion-blog"
+          project: ${{ vars.PROJECT_NAME }}
+          entrypoint: "./main.ts"
+
+  deploy_blog:
+    name: Deploy Blog
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+    if: github.ref == 'refs/heads/blog'
+    environment: Production
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Upload to Deno Deploy
+        uses: denoland/deployctl@v1
+        with:
+          project: ${{ vars.PROJECT_NAME }}
           entrypoint: "./main.ts"
