@@ -122,6 +122,7 @@
     "https://deno.land/x/ts_morph@17.0.1/ts_morph.d.ts": "a54b0c51b06d84defedf5fdd59c773d803808ae7c9678f7165f7a1a6dfa7f6a3",
     "https://deno.land/x/ts_morph@17.0.1/ts_morph.js": "1bb80284b9e31a4c5c2078cd533fe9b12b4b2d710267055cb655225aa88fb2df",
     "https://esm.sh/*preact-render-to-string@5.2.6": "83798e09d30ce66015ebd0ab613ba40d1d170c26f0eeaa8afc68666ad240afd0",
+    "https://esm.sh/@notionhq/client@2.2.5": "efb0c9f981e77085d4a09503cd2ada91fc6d5044a96d55f79438985fbaf992b0",
     "https://esm.sh/@twind/core@1.1.3": "022193fe0f683445f35b232bf4a105d2c2aa48cc035332b4939d4f795c7ed48f",
     "https://esm.sh/@twind/preset-tailwind@1.1.4": "0beb09dff9d04adf90873d2800291cf835ed759ab7061a671d32b5b545967a25",
     "https://esm.sh/preact@10.13.1": "1488a95522db7fdb0b89af27b680650b9def629327149acc868d1e0cadc5c8f5",
@@ -136,94 +137,43 @@
     "https://esm.sh/v111/preact@10.13.1/jsx-runtime/src/index.d.ts": "e153460ed2b3fe2ad8b93696ecd48fbf73cd628b0b0ea6692b71804a3af69dfd",
     "https://esm.sh/v111/preact@10.13.1/src/index.d.ts": "65398710de6aa0a07412da79784e05e6e96763f51c7c91b77344d2d0af06385c",
     "https://esm.sh/v111/preact@10.13.1/src/jsx.d.ts": "fde41cfb4944bcc5005e653c989ef8f85deb1cbb5364a1726654993937cd08d0",
+    "https://esm.sh/v119/@notionhq/client@2.2.5/build/src/Client.d.ts": "398b28fec17c09aeb1a6809f4a6ceb9f8fa30f52f9d49708fed3274325b6e07a",
+    "https://esm.sh/v119/@notionhq/client@2.2.5/build/src/api-endpoints.d.ts": "93e32a968da2b4a495a418a0aa8f3c6a5c2598ea1fde3c27e8e59429b0ed275e",
+    "https://esm.sh/v119/@notionhq/client@2.2.5/build/src/errors.d.ts": "0fffc03f31304fdbbc700619782495fccfbc19d0cf50dd54fdb06fc6aeddf340",
+    "https://esm.sh/v119/@notionhq/client@2.2.5/build/src/fetch-types.d.ts": "96e261d8a9ce4835d86f2bc9a3d7c6fe50622d889602514ee9edbf40631e755e",
+    "https://esm.sh/v119/@notionhq/client@2.2.5/build/src/helpers.d.ts": "94eaf761856fe3a867212868e0b8fa00350c8428c144925709627564b1c4557b",
+    "https://esm.sh/v119/@notionhq/client@2.2.5/build/src/index.d.ts": "e1785299df96eeaf2b673b806adeddb5e1c65479e4cd95c15bfcda8af6ce358b",
+    "https://esm.sh/v119/@notionhq/client@2.2.5/build/src/logging.d.ts": "000192a3f6c84c56032788229b50e91dc3f259762b41d23af8633b9dbe8d9119",
+    "https://esm.sh/v119/@notionhq/client@2.2.5/deno/client.mjs": "0d5bc88a7e0e4be73bd337461437f1780a9eb20b1d3fd6d6e6640cedbd0e0259",
     "https://esm.sh/v119/@twind/core@1.1.3/core.d.ts": "87836d90ff43c5bd5cbb53df7adbcad9d9515fae21f8a31d34203027b7d75d29",
     "https://esm.sh/v119/@twind/core@1.1.3/deno/core.mjs": "9a65476bdc46aeb10894c4496fbfbc863e45ffebf43e58d6320017f847aca7b2",
     "https://esm.sh/v119/@twind/preset-tailwind@1.1.4/deno/preset-tailwind.mjs": "0e2c37580828a43d4e4b251be5e822f81a3b2c08a417f1d29430a6ae7000c02f",
     "https://esm.sh/v119/@twind/preset-tailwind@1.1.4/preset-tailwind.d.ts": "60bdd176e4384b398e49cde38851638a6685e9dd79ee33160039e991607f1755",
+    "https://esm.sh/v119/@types/node-fetch@2.6.3/externals.d.ts": "c8a34d0c858532a9fab7f0b65f3cff6507df055a0cd8b965c4fd5667b5a0cf7d",
+    "https://esm.sh/v119/@types/node-fetch@2.6.3/index.d.ts": "04766da368ec9b5257792abd2dda0b47d14a7d88716612c550a24d97ca5d3903",
+    "https://esm.sh/v119/@types/node@18.16.0/buffer.d.ts": "fb8cf064ad64493cd249e59bfd88d23fc9ceda3b706d10dc759f5c6aebf9f8f9",
+    "https://esm.sh/v119/@types/node@18.16.0/crypto.d.ts": "edd4a6aaad91ea47b9cb78af760175041b75461d621f4b4e6eb1a7d41d4d54b6",
+    "https://esm.sh/v119/@types/node@18.16.0/dns.d.ts": "7a2caffaea1079d6675529a39bc74a5f10a623a27a87c77d84fd9d4340d100c1",
+    "https://esm.sh/v119/@types/node@18.16.0/dns/promises.d.ts": "0374969cff0d1d765dc4a579bb5765a0dbf5f8fefca5c2a0dc2ff2f70f004c94",
+    "https://esm.sh/v119/@types/node@18.16.0/events.d.ts": "b3f1331e7e1c0e472d8444e24fabd9dc4a689b1cd7baea198676bbf95c253f1e",
+    "https://esm.sh/v119/@types/node@18.16.0/http.d.ts": "60a9cd1e9d4a8f62d3fe6af9c117caaa6c58eb47dd15246bdf96a1b49a132863",
+    "https://esm.sh/v119/@types/node@18.16.0/net.d.ts": "628a3c50471ecd20df876061247c9d307e59ec2b0d1afb6cc66d7a565c8d2773",
+    "https://esm.sh/v119/@types/node@18.16.0/querystring.d.ts": "37f17a22de04eef0676ea1574a15fdc56d952fc9f5f7b67890ead09c3942c9ca",
+    "https://esm.sh/v119/@types/node@18.16.0/stream.d.ts": "916649225d02f276475c52b23b1a4c6cc8e411061702351f74e5a69ec0758ea8",
+    "https://esm.sh/v119/@types/node@18.16.0/stream/consumers.d.ts": "f6692a911be084b60e7e90005b23dae23a6eac6d7af42f48f65b96808395c4a1",
+    "https://esm.sh/v119/@types/node@18.16.0/stream/promises.d.ts": "77a0cf3e46005d6ae178dff2c98344ba7c7658039fe75ddcbbec01f5d7902f3a",
+    "https://esm.sh/v119/@types/node@18.16.0/stream/web.d.ts": "5f6c06c322bf7c145a9ae20430798f4011368ccb51115d8ea8ccdcccfca5cfcd",
+    "https://esm.sh/v119/@types/node@18.16.0/tls.d.ts": "6ce6ede1216ed2f0fb987bde4398f506553dd20cbe02cc45ffd3c8d26ed2bbd5",
+    "https://esm.sh/v119/@types/node@18.16.0/url.d.ts": "f8ff62da32657d886a7bccacf49fc1091156a007524c6872bdf072febb8efdab",
     "https://esm.sh/v119/csstype@3.1.2/index.d.ts": "4c68749a564a6facdf675416d75789ee5a557afda8960e0803cf6711fa569288",
+    "https://esm.sh/v119/form-data@3.0.1/index.d.ts": "1abbf7da56b299b9adbcf48d9e3ec756834aaf7fb0a95bb0dffc313e8c450233",
+    "https://esm.sh/v119/node.ns.d.ts": "0fb081f0cd2150931bd54baa04f31466abd9ca701fd9060d07931402cf8367ba",
+    "https://esm.sh/v119/node_fetch.js": "eb4be18bc6ed9f45aacb943cc12e2d9a7dff73537dc6155b96e8c7ab3f79b6ba",
     "https://raw.githubusercontent.com/lucacasonato/esbuild_deno_loader/8031f71afa1bbcd3237a94b11f53a2e5c5c0e7bf/deps.ts": "b7248e5b750be62613a9417f407e65ed43726d83b11f9631d6dbb58634bbd7d1",
     "https://raw.githubusercontent.com/lucacasonato/esbuild_deno_loader/8031f71afa1bbcd3237a94b11f53a2e5c5c0e7bf/mod.ts": "3e507379372361162f93325a216b86f6098defb5bb60144555b507bca26d061f",
     "https://raw.githubusercontent.com/lucacasonato/esbuild_deno_loader/8031f71afa1bbcd3237a94b11f53a2e5c5c0e7bf/src/deno.ts": "71bee6b14e72ca193c0686d8b4f1f47d639a64745b6f5c7576f7a3616f436f57",
     "https://raw.githubusercontent.com/lucacasonato/esbuild_deno_loader/8031f71afa1bbcd3237a94b11f53a2e5c5c0e7bf/src/native_loader.ts": "2a0f5a7b68a57c4651ad48161b32532356b434597a6cf282683427482b38f6fa",
     "https://raw.githubusercontent.com/lucacasonato/esbuild_deno_loader/8031f71afa1bbcd3237a94b11f53a2e5c5c0e7bf/src/portable_loader.ts": "47adb6d9a00f13a87d0a15f2af79118eb93503234008c31392d71270bc0a42fa",
     "https://raw.githubusercontent.com/lucacasonato/esbuild_deno_loader/8031f71afa1bbcd3237a94b11f53a2e5c5c0e7bf/src/shared.ts": "007e8d575cb6ebcac4110f1f72188a8bec3aa29287b4ad26e98403c00bebf036"
-  },
-  "npm": {
-    "specifiers": {
-      "@notionhq/client@2.2.5": "@notionhq/client@2.2.5"
-    },
-    "packages": {
-      "@notionhq/client@2.2.5": {
-        "integrity": "sha512-NobSaeSK0DMuxAIy2pg53Iv850tGFxXYEYacFBQgO634L1uwQv7WQCAdeFQpD3kJiEycQfSYv6RGC5VENEXjiQ==",
-        "dependencies": {
-          "@types/node-fetch": "@types/node-fetch@2.6.3",
-          "node-fetch": "node-fetch@2.6.9"
-        }
-      },
-      "@types/node-fetch@2.6.3": {
-        "integrity": "sha512-ETTL1mOEdq/sxUtgtOhKjyB2Irra4cjxksvcMUR5Zr4n+PxVhsCD9WS46oPbHL3et9Zde7CNRr+WUNlcHvsX+w==",
-        "dependencies": {
-          "@types/node": "@types/node@18.16.3",
-          "form-data": "form-data@3.0.1"
-        }
-      },
-      "@types/node@18.16.3": {
-        "integrity": "sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==",
-        "dependencies": {}
-      },
-      "asynckit@0.4.0": {
-        "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==",
-        "dependencies": {}
-      },
-      "combined-stream@1.0.8": {
-        "integrity": "sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==",
-        "dependencies": {
-          "delayed-stream": "delayed-stream@1.0.0"
-        }
-      },
-      "delayed-stream@1.0.0": {
-        "integrity": "sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==",
-        "dependencies": {}
-      },
-      "form-data@3.0.1": {
-        "integrity": "sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==",
-        "dependencies": {
-          "asynckit": "asynckit@0.4.0",
-          "combined-stream": "combined-stream@1.0.8",
-          "mime-types": "mime-types@2.1.35"
-        }
-      },
-      "mime-db@1.52.0": {
-        "integrity": "sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==",
-        "dependencies": {}
-      },
-      "mime-types@2.1.35": {
-        "integrity": "sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==",
-        "dependencies": {
-          "mime-db": "mime-db@1.52.0"
-        }
-      },
-      "node-fetch@2.6.9": {
-        "integrity": "sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==",
-        "dependencies": {
-          "whatwg-url": "whatwg-url@5.0.0"
-        }
-      },
-      "tr46@0.0.3": {
-        "integrity": "sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==",
-        "dependencies": {}
-      },
-      "webidl-conversions@3.0.1": {
-        "integrity": "sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==",
-        "dependencies": {}
-      },
-      "whatwg-url@5.0.0": {
-        "integrity": "sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==",
-        "dependencies": {
-          "tr46": "tr46@0.0.3",
-          "webidl-conversions": "webidl-conversions@3.0.1"
-        }
-      }
-    }
   }
 }
