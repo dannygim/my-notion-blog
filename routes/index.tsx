@@ -20,7 +20,7 @@ export const handler: Handlers<Data> = {
 
 export default function Page({ data }: PageProps<Data>) {
   return (
-    <div class="max-w-3xl mx-auto grid grid-cols-2 gap-6">
+    <div class="max-w-3xl mx-auto px-3 md:px-6 grid md:grid-cols-2 gap-4 lg:gap-6">
       {data.posts.map((post) => {
         return (
           <a title={post.title} href={`/${post.id}`}>

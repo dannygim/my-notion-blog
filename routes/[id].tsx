@@ -22,7 +22,7 @@ export default function Greet({ data }: PageProps<Data>) {
   const { page } = data;
 
   return (
-    <article class="max-w-3xl p-6 mx-auto">
+    <article class="max-w-3xl px-3 md:px-6 mx-auto">
       <img class="object-cover object-center w-full h-screen-3/10 rounded-t-lg" src={page.cover ?? `./default_cover.jpg`} alt={page.title} />
       <div class="my-2 text-sm text-gray-700 dark:text-gray-500">Posted: {dateFormatter.format(new Date(page.createdAt))}</div>
       <div class="my-2 text-sm text-gray-700 dark:text-gray-500">Updated: {dateFormatter.format(new Date(page.lastEditedAt))}</div>
