@@ -3,6 +3,9 @@ import { Page } from "$/domain/model/page.ts";
 import { GetPageUseCase } from "$/usecase/get_page.ts";
 import { PageNotionClient } from "$/infrastructure/page_notion_client.ts";
 
+import BlockRichText from "$/components/BlockRichText.tsx";
+import BlockBookmark from "$/islands/BlockBookmark.tsx";
+
 const dateFormatter = new Intl.DateTimeFormat('ja-JP', { dateStyle: 'long', timeStyle: 'long' });
 
 type Data = {
@@ -23,12 +26,11 @@ export default function Greet({ data }: PageProps<Data>) {
 
   return (
     <article class="max-w-3xl px-3 md:px-6 mx-auto">
-      <img class="object-cover object-center w-full h-screen-3/10 rounded-t-lg" src={page.cover ?? `./default_cover.jpg`} alt={page.title} />
-      <div class="my-2 text-sm text-gray-700 dark:text-gray-500">Posted: {dateFormatter.format(new Date(page.createdAt))}</div>
-      <div class="my-2 text-sm text-gray-700 dark:text-gray-500">Updated: {dateFormatter.format(new Date(page.lastEditedAt))}</div>
-      <h1 class="mb-2 text-5xl font-bold tracking-tight text-gray-900 dark:text-white">{page.title}</h1>
+      <img class="mb-4 object-cover object-center w-full h-screen-3/10 rounded-t-lg" src={page.cover ?? `./default_cover.jpg`} alt={page.title} />
+      <div class="my-2 text-sm text-gray-500">Posted: {dateFormatter.format(new Date(page.createdAt))}</div>
+      <div class="my-2 text-sm text-gray-500">Updated: {dateFormatter.format(new Date(page.lastEditedAt))}</div>
+      <h1 class="my-4 text-5xl font-bold tracking-tight text-gray-900 dark:text-white">{page.title}</h1>
       {page.blocks.map((block) => <Block block={block} />)}
-      {/* {page.blocks.map((block) => (<div>Block: {block.id}</div>))} */}
     </article>
   );
 }
@@ -44,11 +46,11 @@ function Block({ block }: BlockProps) {
   // https://developers.notion.com/reference/block#keys
   switch (type) {
     case "image": return <BlockImage value={value} />;
-    case "paragraph": return (<p class="mt-2 text-xl"><BlockText richTexts={value.rich_text} /></p>);
-    case "heading_1": return (<h1 class="mt-2 text-4xl font-bold"><BlockText richTexts={value.rich_text} /></h1>);
-    case "heading_2": return (<h2 class="mt-2 text-3xl font-bold"><BlockText richTexts={value.rich_text} /></h2>);
-    case "heading_3": return (<h3 class="mt-2 text-2xl font-bold"><BlockText richTexts={value.rich_text} /></h3>);
-    case "bookmark":
+    case "paragraph": return (<p class="my-4 text-xl"><BlockRichText richTexts={value.rich_text} /></p>);
+    case "heading_1": return (<h1 class="my-4 text-4xl font-bold"><BlockRichText richTexts={value.rich_text} /></h1>);
+    case "heading_2": return (<h2 class="my-4 text-3xl font-bold"><BlockRichText richTexts={value.rich_text} /></h2>);
+    case "heading_3": return (<h3 class="my-4 text-2xl font-bold"><BlockRichText richTexts={value.rich_text} /></h3>);
+    case "bookmark": return <BlockBookmark url={value.url} />;
     case "breadcrumb":
     case "bulleted_list_item":
     case "callout":
@@ -93,31 +95,4 @@ function BlockImage({ value }: { value: any }) {
       {caption && <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">{caption}</figcaption>}
     </figure>
   );
-}
-
-function BlockText({ richTexts }: { richTexts: any[]; }) {
-  if (!richTexts) {
-    return null;
-  }
-
-  return (<>
-    {richTexts.map((richText: any) => {
-      const {
-        annotations: { bold, code, color, italic, strikethrough, underline },
-        text,
-      } = richText;
-      return <span
-        key={text.content}
-        class={`text-gray-700 dark:text-gray-400
-          ${bold ? "font-bold" : ""}
-          ${code ? "font-mono" : ""}
-          ${italic ? "italic" : ""}
-          ${strikethrough ? "line-through" : ""}
-          ${underline ? "underline" : ""}
-        `}
-      >
-        {richText.link ? <a href={richText.link.url}>{text}</a> : text.content}
-      </span>
-    })}
-  </>);
 }
