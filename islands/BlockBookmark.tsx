@@ -14,26 +14,30 @@ export default function BlockBookmark({ url }: { url: string }) {
   }, []);
 
   const fetchOgp = async (url: string) => {
-    const response = await fetch(url);
-    const html = await response.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-    const metaTags = doc.querySelectorAll('meta[property^="og:"],meta[name^="og:"]');
+    try {
+      const response = await fetch(url);
+      const html = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+      const metaTags = doc.querySelectorAll('meta[property^="og:"],meta[name^="og:"]');
 
-    const ogpInfo: Record<string, string> = {};
+      const ogpInfo: Record<string, string> = {};
 
-    metaTags.forEach((metaTag) => {
-      const property = metaTag.getAttribute("property") ?? metaTag.getAttribute("name");
-      const content = metaTag.getAttribute("content");
+      metaTags.forEach((metaTag) => {
+        const property = metaTag.getAttribute("property") ?? metaTag.getAttribute("name");
+        const content = metaTag.getAttribute("content");
 
-      if (property && content) ogpInfo[property] = content;
-    });
+        if (property && content) ogpInfo[property] = content;
+      });
 
-    setState({
-      title: ogpInfo["og:title"] ?? "",
-      description: ogpInfo["og:description"] ?? "",
-      image: ogpInfo["og:image"],
-    });
+      setState({
+        title: ogpInfo["og:title"] ?? "",
+        description: ogpInfo["og:description"] ?? "",
+        image: ogpInfo["og:image"],
+      });
+    } catch (error) {
+      console.warn("maybe CORS error:", error);
+    }
   };
 
   return (

@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 export default function BlockRichText({ richTexts }: { richTexts: any[]; }) {
   if (!richTexts) {
     return null;

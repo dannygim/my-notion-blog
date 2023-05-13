@@ -1,36 +1,41 @@
+// deno-lint-ignore-file no-explicit-any
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { Page } from "$/domain/model/page.ts";
-import { GetPageUseCase } from "$/usecase/get_page.ts";
-import { PageNotionClient } from "$/infrastructure/page_notion_client.ts";
+import { Post } from "$/domain/model/post.ts";
+import { GetPostUseCase } from "$/usecase/get_post.ts";
+import { PostNotionRepository } from "$/infrastructure/post_notion_client.ts";
 
-import BlockRichText from "$/components/BlockRichText.tsx";
+import BlockDivider from "$/components/BlockDivider.tsx";
+import BlockHeading from "$/components/BlockHeading.tsx";
+import BlockParagraph from "$/components/BlockParagraph.tsx";
+import BlockImage from "$/components/BlockImage.tsx";
+import BlockVideo from "$/components/BlockVideo.tsx";
 import BlockBookmark from "$/islands/BlockBookmark.tsx";
 
 const dateFormatter = new Intl.DateTimeFormat('ja-JP', { dateStyle: 'long', timeStyle: 'long' });
 
 type Data = {
-  page: Page;
+  post: Post;
 };
 
 export const handler: Handlers<Data> = {
   async GET(_, ctx) {
-    const repository = new PageNotionClient();
-    const usecase = new GetPageUseCase(repository);
-    const page = await usecase.execute(ctx.params.id);
-    return ctx.render({ page });
+    const repository = new PostNotionRepository();
+    const usecase = new GetPostUseCase(repository);
+    const post = await usecase.execute(ctx.params.id);
+    return ctx.render({ post });
   }
 };
 
 export default function Greet({ data }: PageProps<Data>) {
-  const { page } = data;
+  const { post } = data;
 
   return (
     <article class="max-w-3xl px-3 md:px-6 mx-auto">
-      <img class="mb-4 object-cover object-center w-full h-screen-3/10 rounded-t-lg" src={page.cover ?? `./default_cover.jpg`} alt={page.title} />
-      <div class="my-2 text-sm text-gray-500">Posted: {dateFormatter.format(new Date(page.createdAt))}</div>
-      <div class="my-2 text-sm text-gray-500">Updated: {dateFormatter.format(new Date(page.lastEditedAt))}</div>
-      <h1 class="my-4 text-5xl font-bold tracking-tight text-gray-900 dark:text-white">{page.title}</h1>
-      {page.blocks.map((block) => <Block block={block} />)}
+      <img class="mb-4 object-cover object-center w-full h-screen-3/10 rounded-t-lg" src={post.cover ?? `./default_cover.jpg`} alt={post.title} />
+      <div class="my-2 text-sm text-gray-500">Posted: {dateFormatter.format(new Date(post.createdAt))}</div>
+      <div class="my-2 text-sm text-gray-500">Updated: {dateFormatter.format(new Date(post.lastEditedAt))}</div>
+      <h1 class="my-4 text-5xl font-bold tracking-tight text-gray-900 dark:text-white">{post.title}</h1>
+      {post.blocks.map((block) => <Block block={block} />)}
     </article>
   );
 }
@@ -46,36 +51,36 @@ function Block({ block }: BlockProps) {
   // https://developers.notion.com/reference/block#keys
   switch (type) {
     case "image": return <BlockImage value={value} />;
-    case "paragraph": return (<p class="my-4 text-xl"><BlockRichText richTexts={value.rich_text} /></p>);
-    case "heading_1": return (<h1 class="my-4 text-4xl font-bold"><BlockRichText richTexts={value.rich_text} /></h1>);
-    case "heading_2": return (<h2 class="my-4 text-3xl font-bold"><BlockRichText richTexts={value.rich_text} /></h2>);
-    case "heading_3": return (<h3 class="my-4 text-2xl font-bold"><BlockRichText richTexts={value.rich_text} /></h3>);
+    case "paragraph": return <BlockParagraph richTexts={value.rich_text} />;
+    case "heading_1": return <BlockHeading level="1" richTexts={value.rich_text} />;
+    case "heading_2": return <BlockHeading level="2" richTexts={value.rich_text} />;
+    case "heading_3": return <BlockHeading level="3" richTexts={value.rich_text} />;
     case "bookmark": return <BlockBookmark url={value.url} />;
-    case "breadcrumb":
-    case "bulleted_list_item":
-    case "callout":
-    case "child_database":
-    case "child_page":
-    case "column":
-    case "column_list":
-    case "divider":
-    case "embed":
-    case "equation":
-    case "file":
-    case "link_preview":
-    case "link_to_page":
-    case "numbered_list_item":
-    case "pdf":
-    case "quote":
-    case "synced_block":
-    case "table":
-    case "table_of_contents":
-    case "table_row":
-    case "template":
-    case "to_do":
-    case "toggle":
-    case "video":
-    case "unsupported":
+    case "divider": return <BlockDivider />;
+    case "video": return <BlockVideo url={value.external?.url ?? value.file.url} />;
+    case "breadcrumb": // TODO: implement
+    case "bulleted_list_item": // TODO: implement
+    case "callout": // TODO: implement
+    case "child_database": // TODO: implement
+    case "child_page": // TODO: implement
+    case "column": // TODO: implement
+    case "column_list": // TODO: implement
+    case "embed": // TODO: implement
+    case "equation": // TODO: implement
+    case "file": // TODO: implement
+    case "link_preview": // TODO: implement
+    case "link_to_page": // TODO: implement
+    case "numbered_list_item": // TODO: implement
+    case "pdf": // TODO: implement
+    case "quote": // TODO: implement
+    case "synced_block": // TODO: implement
+    case "table": // TODO: implement
+    case "table_of_contents": // TODO: implement
+    case "table_row": // TODO: implement
+    case "template": // TODO: implement
+    case "to_do": // TODO: implement
+    case "toggle": // TODO: implement
+    case "unsupported": // TODO: implement
     default:
       return <BlockUnsupported block={block} />;
   }
@@ -84,15 +89,4 @@ function Block({ block }: BlockProps) {
 function BlockUnsupported({ block }: BlockProps) {
   console.log("block:", block);
   return (<div class="mt-2 text-xl text-gray-700 dark:text-gray-400 leading-6">Unsupported block type: {block.type}</div>);
-}
-
-function BlockImage({ value }: { value: any }) {
-  const src = value.type === "external" ? value.external.url : value.file.url;
-  const caption = value.caption?.at(0)?.plain_text ?? "";
-  return (
-    <figure class="max-w-lg mx-auto mt-2">
-      <img src={src} alt={caption} class="h-auto max-w-full rounded-lg" />
-      {caption && <figcaption class="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">{caption}</figcaption>}
-    </figure>
-  );
 }
