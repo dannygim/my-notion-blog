@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Post } from "$/domain/model/post.ts";
 import { GetPostUseCase } from "$/usecase/get_post.ts";
@@ -7,6 +8,7 @@ import BlockDivider from "$/components/BlockDivider.tsx";
 import BlockHeading from "$/components/BlockHeading.tsx";
 import BlockParagraph from "$/components/BlockParagraph.tsx";
 import BlockImage from "$/components/BlockImage.tsx";
+import BlockVideo from "$/components/BlockVideo.tsx";
 import BlockBookmark from "$/islands/BlockBookmark.tsx";
 
 const dateFormatter = new Intl.DateTimeFormat('ja-JP', { dateStyle: 'long', timeStyle: 'long' });
@@ -55,6 +57,7 @@ function Block({ block }: BlockProps) {
     case "heading_3": return <BlockHeading level="3" richTexts={value.rich_text} />;
     case "bookmark": return <BlockBookmark url={value.url} />;
     case "divider": return <BlockDivider />;
+    case "video": return <BlockVideo url={value.external?.url ?? value.file.url} />;
     case "breadcrumb": // TODO: implement
     case "bulleted_list_item": // TODO: implement
     case "callout": // TODO: implement
@@ -77,7 +80,6 @@ function Block({ block }: BlockProps) {
     case "template": // TODO: implement
     case "to_do": // TODO: implement
     case "toggle": // TODO: implement
-    case "video": // TODO: implement
     case "unsupported": // TODO: implement
     default:
       return <BlockUnsupported block={block} />;

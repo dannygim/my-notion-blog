@@ -1,3 +1,3 @@
 export default function BlockDivider() {
-  return (<hr />);
+  return (<hr class="my-2" />);
 }
