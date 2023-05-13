@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Post } from "$/domain/model/post.ts";
 import { GetPostsUseCase } from "$/usecase/get_posts.ts";
-import { PostNotionClient } from "$/infrastructure/post_notion_client.ts";
+import { PostNotionRepository } from "$/infrastructure/post_notion_client.ts";
 
 const dateFormatter = new Intl.DateTimeFormat('ja-JP', { dateStyle: 'medium', timeStyle: 'medium' });
 
@@ -11,7 +11,7 @@ type Data = {
 
 export const handler: Handlers<Data> = {
   async GET(_, ctx) {
-    const repository = new PostNotionClient();
+    const repository = new PostNotionRepository();
     const usecase = new GetPostsUseCase(repository);
     const posts = await usecase.execute();
     return ctx.render({ posts });

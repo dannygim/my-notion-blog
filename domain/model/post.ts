@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 export type Post = {
   id: string;
   title: string;
@@ -5,4 +6,5 @@ export type Post = {
   cover?: string;
   createdAt: string;
   lastEditedAt: string;
+  blocks: any[];
 };

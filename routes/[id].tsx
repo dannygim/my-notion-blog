@@ -1,7 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { Page } from "$/domain/model/page.ts";
-import { GetPageUseCase } from "$/usecase/get_page.ts";
-import { PageNotionClient } from "$/infrastructure/page_notion_client.ts";
+import { Post } from "$/domain/model/post.ts";
+import { GetPostUseCase } from "$/usecase/get_post.ts";
+import { PostNotionRepository } from "$/infrastructure/post_notion_client.ts";
 
 import BlockRichText from "$/components/BlockRichText.tsx";
 import BlockBookmark from "$/islands/BlockBookmark.tsx";
@@ -9,28 +9,28 @@ import BlockBookmark from "$/islands/BlockBookmark.tsx";
 const dateFormatter = new Intl.DateTimeFormat('ja-JP', { dateStyle: 'long', timeStyle: 'long' });
 
 type Data = {
-  page: Page;
+  post: Post;
 };
 
 export const handler: Handlers<Data> = {
   async GET(_, ctx) {
-    const repository = new PageNotionClient();
-    const usecase = new GetPageUseCase(repository);
-    const page = await usecase.execute(ctx.params.id);
-    return ctx.render({ page });
+    const repository = new PostNotionRepository();
+    const usecase = new GetPostUseCase(repository);
+    const post = await usecase.execute(ctx.params.id);
+    return ctx.render({ post });
   }
 };
 
 export default function Greet({ data }: PageProps<Data>) {
-  const { page } = data;
+  const { post } = data;
 
   return (
     <article class="max-w-3xl px-3 md:px-6 mx-auto">
-      <img class="mb-4 object-cover object-center w-full h-screen-3/10 rounded-t-lg" src={page.cover ?? `./default_cover.jpg`} alt={page.title} />
-      <div class="my-2 text-sm text-gray-500">Posted: {dateFormatter.format(new Date(page.createdAt))}</div>
-      <div class="my-2 text-sm text-gray-500">Updated: {dateFormatter.format(new Date(page.lastEditedAt))}</div>
-      <h1 class="my-4 text-5xl font-bold tracking-tight text-gray-900 dark:text-white">{page.title}</h1>
-      {page.blocks.map((block) => <Block block={block} />)}
+      <img class="mb-4 object-cover object-center w-full h-screen-3/10 rounded-t-lg" src={post.cover ?? `./default_cover.jpg`} alt={post.title} />
+      <div class="my-2 text-sm text-gray-500">Posted: {dateFormatter.format(new Date(post.createdAt))}</div>
+      <div class="my-2 text-sm text-gray-500">Updated: {dateFormatter.format(new Date(post.lastEditedAt))}</div>
+      <h1 class="my-4 text-5xl font-bold tracking-tight text-gray-900 dark:text-white">{post.title}</h1>
+      {post.blocks.map((block) => <Block block={block} />)}
     </article>
   );
 }
