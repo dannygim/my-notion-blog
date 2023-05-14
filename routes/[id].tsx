@@ -1,4 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
+import { Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { Post } from "$/domain/model/post.ts";
 import { GetPostUseCase } from "$/usecase/get_post.ts";
@@ -10,6 +11,7 @@ import BlockParagraph from "$/components/BlockParagraph.tsx";
 import BlockImage from "$/components/BlockImage.tsx";
 import BlockVideo from "$/components/BlockVideo.tsx";
 import BlockBookmark from "$/islands/BlockBookmark.tsx";
+import BlockCode from "$/islands/BlockCode.tsx";
 
 const dateFormatter = new Intl.DateTimeFormat('ja-JP', { dateStyle: 'long', timeStyle: 'long' });
 
@@ -26,10 +28,18 @@ export const handler: Handlers<Data> = {
   }
 };
 
-export default function Greet({ data }: PageProps<Data>) {
+export default function Post({ data }: PageProps<Data>) {
   const { post } = data;
+  const isIncludedCode = post.blocks.some((block: any) => block.type === "code");
 
-  return (
+  return <>
+    <Head>
+      {isIncludedCode && <link
+        type="text/css"
+        rel="stylesheet"
+        href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css"
+      />}
+    </Head>
     <article class="max-w-3xl px-3 md:px-6 mx-auto">
       <img class="mb-4 object-cover object-center w-full h-screen-3/10 rounded-t-lg" src={post.cover ?? `./default_cover.jpg`} alt={post.title} />
       <div class="my-2 text-sm text-gray-500">Posted: {dateFormatter.format(new Date(post.createdAt))}</div>
@@ -37,7 +47,7 @@ export default function Greet({ data }: PageProps<Data>) {
       <h1 class="my-4 text-5xl font-bold tracking-tight text-gray-900 dark:text-white">{post.title}</h1>
       {post.blocks.map((block) => <Block block={block} />)}
     </article>
-  );
+  </>;
 }
 
 type BlockProps = {
@@ -58,6 +68,7 @@ function Block({ block }: BlockProps) {
     case "bookmark": return <BlockBookmark url={value.url} />;
     case "divider": return <BlockDivider />;
     case "video": return <BlockVideo url={value.external?.url ?? value.file.url} />;
+    case "code": return <BlockCode language={value.language} richTexts={value.rich_text} caption={value.caption} />;
     case "breadcrumb": // TODO: implement
     case "bulleted_list_item": // TODO: implement
     case "callout": // TODO: implement
@@ -87,6 +98,5 @@ function Block({ block }: BlockProps) {
 }
 
 function BlockUnsupported({ block }: BlockProps) {
-  console.log("block:", block);
-  return (<div class="mt-2 text-xl text-gray-700 dark:text-gray-400 leading-6">Unsupported block type: {block.type}</div>);
+  return <div class="mt-2 text-xl text-gray-700 dark:text-gray-400 leading-6">Unsupported block type: {block.type}</div>;
 }
